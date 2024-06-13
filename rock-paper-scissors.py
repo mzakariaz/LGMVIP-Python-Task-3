@@ -20,6 +20,7 @@ how_to_play.grid(row = 0, column = 0, padx = 10, pady = 10)
 instructions = """Welcome! This application is an elementary Rock, Paper, Scissors game. Here are the rules:
     - The game shall run indefinitely, until the player chooses to quit.
     - Each round, the player must choose between one of the following menu: "Rock", "Paper", or "Scissors".
+    - The player is up against the CPU, which will be the opponent.
     - The CPU will also automatically pick from the same list of menu each round.
     - Each round, the player or the CPU wins according to the following: "Rock" beats "Scissors", "Scissors" beats "Paper" and "Paper" beats "Rock".
     - Each round, the winner gains one point, and the loser gains no points (hence will also lose no points).
@@ -52,8 +53,8 @@ def play():
             if win:
                 player_score += 1
                 game_progress.config(text = f"Round {round}")
-                player_score_label.config(text = f"Your Score: {player_score}")
-                opponent_score_label.config(text = f"Your Score: {cpu_score}")
+                player_score_label.config(text = f"Your score: {player_score}")
+                opponent_score_label.config(text = f"Opponent's score: {cpu_score}")
                 win_text = f"Congratulations! You've won this round! Your opponent picked {cpu_choice} and you picked {player_choice}. Well done!"
                 win_label = tw.fill(win_text, width = 50, subsequent_indent = '\n')
                 update_notice.config(text = win_label)
@@ -61,18 +62,17 @@ def play():
             elif lose:
                 cpu_score += 1
                 game_progress.config(text = f"Round {round}")
-                player_score_label.config(text = f"Your Score: {player_score}")
-                opponent_score_label.config(text = f"Your Score: {cpu_score}")
+                player_score_label.config(text = f"Your score: {player_score}")
+                opponent_score_label.config(text = f"Opponent's score: {cpu_score}")
                 lose_text = f"Bad luck! You've lost this round! Your opponent picked {cpu_choice} and you picked {player_choice}. Better luck next time!"
                 lose_label = tw.fill(lose_text, width = 50, subsequent_indent = '\n')
                 update_notice.config(text = lose_label)
                 cpu_choice = rd.choice(choices)
             elif not(player_choice is None):
                 game_progress.config(text = f"Round {round}")
-                player_score_label.config(text = f"Your Score: {player_score}")
-                opponent_score_label.config(text = f"Your Score: {cpu_score}")
+                player_score_label.config(text = f"Your score: {player_score}")
+                opponent_score_label.config(text = f"Opponent's score: {cpu_score}")
                 draw_text = f"Great timing! This round is a draw! You and your opponent both picked {player_choice}. Keep going!"
-                print(player_choice == cpu_choice)
                 draw_label = tw.fill(draw_text, width = 50, subsequent_indent = '\n')
                 update_notice.config(text = draw_label)
                 cpu_choice = rd.choice(choices)
@@ -98,7 +98,7 @@ def play():
     submit_button.grid(row = 1, column = 1)
     game_progress = tk.LabelFrame(new_frame, text = f"Round {round}")
     game_progress.grid(row = 1, column = 0)
-    player_score_label = tk.Label(game_progress, text = f"Your Score: {player_score}")
+    player_score_label = tk.Label(game_progress, text = f"Your score: {player_score}")
     player_score_label.grid(row = 0, column = 0)
     opponent_score_label = tk.Label(game_progress, text = f"Opponent's score: {cpu_score}")
     opponent_score_label.grid(row = 0, column = 1)
